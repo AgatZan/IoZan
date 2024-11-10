@@ -35,3 +35,21 @@ jobs:
         run: |
           npm install
           npm run build -- ttf::${{ matrix.fontName }}
+          echo ${{ github.sha }} > Release.txt
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            Release.txt
+            dist/IosevkaZan/TTF/IosevkaZan-ExtraLight.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-ExtraLightOblique.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-ExtraLightItalic.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-Regular.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-Oblique.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-Italic.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-Bold.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-BoldOblique.ttf
+            dist/IosevkaZan/TTF/IosevkaZan-BoldItalic.ttf
+            
+      
