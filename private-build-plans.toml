@@ -43,3 +43,24 @@ exportGlyphNames = false
   [buildPlans.IosevkaZan.ligations]
   inherits = "dlig"
   enables  = ["tildeeq", "slasheq"]               # Optional; enable specific ligation groups, overrides inherited ligation set
+
+
+[buildPlans.IosevkaZan.weights.ExtraLight]
+shape = 200
+menu = 200
+css = 200
+
+[buildPlans.IosevkaZan.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.IosevkaZan.weights.Bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.IosevkaZan.widths.Normal]
+shape = 500
+menu = 5
+css = "normal"
