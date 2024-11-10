@@ -42,7 +42,7 @@ jobs:
         shell: bash
         working-directory: iosevka
         run: |
-          zip -r IosevkaZan.zip iosevka/dist/IosevkaZan/TTF/
+          zip -r IosevkaZan.zip dist/IosevkaZan/TTF/
       - name: List files
         working-directory: iosevka
         run: ls -la
