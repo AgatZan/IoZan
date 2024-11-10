@@ -1,0 +1,45 @@
+[buildPlans.IosevkaZan]
+family = "IosevkaZan"
+spacing = "fontconfig-mono"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = false
+
+  [buildPlans.IosevkaZan.variants]
+  inherits = "ss20"
+
+    [buildPlans.IosevkaZan.variants.design]
+    zero = "tall-slashed"
+    f = "serifless"
+    g = "double-storey"
+    i = "hooky"
+    j = "diagonal-tailed-serifless"
+    p = "eared-serifless"
+    q = "straight-serifless"
+    v = "straight-serifless"
+    w = "straight-serifless"
+    capital-eszet = "flat-top-serifed"
+    lower-lambda = "straight-turn"
+    tittle = "round"
+    braille-dot = "round"
+    tilde = "low"
+    asterisk = "penta-mid"
+    underscore = "high"
+    ascii-grave = "straight"
+    ascii-single-quote = "straight"
+    paren = "large-contour"
+    brace = "curly-flat-boundary"
+    guillemet = "curly"
+    number-sign = "upright"
+    ampersand = "closed"
+    at = "threefold"
+    dollar = "through"
+    bar = "natural-slope"
+    question = "smooth"
+    pilcrow = "high"
+    lig-equal-chain = "without-notch"
+    lig-double-arrow-bar = "without-notch"
+
+  [buildPlans.IosevkaZan.ligations]
+  inherits = "dlig"
+  enables  = ["tildeeq", "slasheq"]               # Optional; enable specific ligation groups, overrides inherited ligation set
