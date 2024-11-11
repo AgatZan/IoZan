@@ -9,6 +9,11 @@ jobs:
     name: Build ${{ matrix.fontName }} font
     if: github.repository == 'AgatZan/IosevkaZan'
     runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
 
     strategy:
       matrix:
@@ -82,7 +87,7 @@ jobs:
           unzip FontPatcher.zip -d FontPatcher/
           fontforge --script `pwd`/FontPatcher/font-patcher --version
           mkdir iosevka/dist/IosevkaZan/NF/
-          fontforge --script `pwd`/FontPatcher/font-patcher -c --careful `pwd`/iosevka/dist/IosevkaZan/TTF/IosevkaZan-Regular.ttf -out `pwd`/iosevka/dist/IosevkaZan/NF
+          fontforge --script `pwd`/FontPatcher/font-patcher -c --careful `pwd`/iosevka/dist/IosevkaZan/TTF/*.ttf -out `pwd`/iosevka/dist/IosevkaZan/NF
           zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
       - name: Release
         uses: actions/upload-artifact@v4
