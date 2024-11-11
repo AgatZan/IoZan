@@ -89,7 +89,7 @@ jobs:
           mkdir iosevka/dist/IosevkaZan/NF/
           for file in `pwd`/iosevka/dist/IosevkaZan/TTF/*.ttf
           do
-            fontforge --script `pwd`/FontPatcher/font-patcher -c --careful file -out `pwd`/iosevka/dist/IosevkaZan/NF
+            fontforge --script `pwd`/FontPatcher/font-patcher -c --careful $file -out `pwd`/iosevka/dist/IosevkaZan/NF
           done
           
           zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
