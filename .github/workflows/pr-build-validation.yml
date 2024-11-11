@@ -81,6 +81,7 @@ jobs:
           wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip
           unzip FontPatcher.zip -d FontPatcher/
           fontforge --script `pwd`/FontPatcher/font-patcher --version
+          mkdir iosevka/dist/IosevkaZan/NF/
           fontforge --script `pwd`/FontPatcher/font-patcher -c --careful iosevka/dist/IosevkaZan/TTF/ -out iosevka/dist/IosevkaZan/NF/
           zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
       - name: Release
