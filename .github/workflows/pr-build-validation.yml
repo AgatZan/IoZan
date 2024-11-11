@@ -1,7 +1,9 @@
 name: PR Font Build Validation
 
-on: push
-
+on:
+  push:
+    tags:
+      - "v*.*.*"
 jobs:
   build:
     name: Build ${{ matrix.fontName }} font
@@ -46,15 +48,62 @@ jobs:
       - name: List files
         working-directory: iosevka
         run: ls -la
+      # Install and setup Dependencies
+      # @TODO cache the next 4 steps with actions/cache or upload
+      - name: Setup core dependencies
+        run: |
+          sudo apt update -y -q
+          sudo apt install software-properties-common -y -q
+          sudo apt install python3-fontforge -y -q
+          sudo apt install fuse -y -q
+
+      # Ubuntu 20.04 has only fontforge release 2020, but there are some vital bugfixes in the 2022 release
+      # This can be replaced with the ordinary apt package when Ubuntu updates, probably with 22.10?
+      # On the other hand ... why not be on the latest release always?
+      - name: Fetch FontForge
+        run: |
+          curl -L "https://github.com/fontforge/fontforge/releases/download/20230101/FontForge-2023-01-01-a1dad3e-x86_64.AppImage" \
+            --output fontforge
+          chmod u+x fontforge
+          echo Try appimage
+          ./fontforge --version
+          export PATH=`pwd`:$PATH
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          echo Try appimage with path
+          fontforge --version
+      - name: Verify setup
+        run: |
+          fontforge --version
+          fontforge --version 2>&1 | grep libfontforge | awk '{print $NF}'
+      - name: Nerd Font
+        shell: bash
+        run: |
+          wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip
+          unzip FontPatcher.zip -d FontPatcher/
+          fontforge --script FontPatcher/font-patcher --version
+          fontforge --script FontPatcher/font-patcher -c --careful iosevka/dist/IosevkaZan/TTF/ -out iosevka/dist/IosevkaZan/NF/
+          zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
       - name: Release
         uses: actions/upload-artifact@v4
         with:
           name: IosevkaZan
-          path: |
-            iosevka/IosevkaZan.zip
-        # uses: softprops/action-gh-release@v2
-        # if: startsWith(github.ref, 'refs/tags/')
-        # with:
-        #   files: |
-        #     IosevkaZan.zip
+          path: iosevka/IosevkaZan.zip
+          retention-days: 1
+      - name: ReleaseNF
+        uses: actions/upload-artifact@v4
+        with:
+          name: IosevkaZanNF
+          path: IosevkaZanNF.zip
+          retention-days: 1
+      - uses: actions/download-artifact@v4
+      - name: Generate SHA256 checksums
+        run: |
+          sha256sum iosevka/IosevkaZan.zip > IosevkaZan.zip.sha256sum
+          echo "SHA_IOZAN=$(cat IosevkaZan.zip.sha256sum)" >> $GITHUB_ENV
+      - name: Generate SHA256 checksums NF
+        run: |
+          sha256sum IosevkaZanNF.zip > IosevkaZan.zip.sha256sum
+          echo "SHA_IOZAN_NF=$(cat IosevkaZanNF.zip.sha256sum)" >> $GITHUB_ENV
+      - name: Publish release
+        run: gh release create $TAG_NAME --title "$SUBJECT" --target $GITHUB_SHA iosevka/IosevkaZan.zip IosevkaZanNF.zip
             
