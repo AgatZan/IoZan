@@ -82,7 +82,7 @@ jobs:
           unzip FontPatcher.zip -d FontPatcher/
           fontforge --script `pwd`/FontPatcher/font-patcher --version
           mkdir iosevka/dist/IosevkaZan/NF/
-          fontforge --script `pwd`/FontPatcher/font-patcher -c --careful `pwd`/iosevka/dist/IosevkaZan/TTF/ -out `pwd`/iosevka/dist/IosevkaZan/NF/IosevkaZan-Regular.ttf
+          fontforge --script `pwd`/FontPatcher/font-patcher -c --careful `pwd`/iosevka/dist/IosevkaZan/TTF/IosevkaZan-Regular.ttf -out `pwd`/iosevka/dist/IosevkaZan/NF
           zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
       - name: Release
         uses: actions/upload-artifact@v4
