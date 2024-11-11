@@ -112,7 +112,7 @@ jobs:
           echo "SHA_IOZAN=$(cat IosevkaZan.zip.sha256sum)" >> $GITHUB_ENV
       - name: Generate SHA256 checksums NF
         run: |
-          sha256sum IosevkaZanNF.zip > IosevkaZan.zip.sha256sum
+          sha256sum IosevkaZanNF.zip > IosevkaZanNF.zip.sha256sum
           echo "SHA_IOZAN_NF=$(cat IosevkaZanNF.zip.sha256sum)" >> $GITHUB_ENV
       - name: Upload zip
         uses: softprops/action-gh-release@v2
