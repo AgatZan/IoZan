@@ -42,7 +42,7 @@ jobs:
         run: |
           npm install
           npm run build -- ttf::${{ matrix.fontName }}
-          zir -r ${{ matrix.fontName }}.zip dist/${{ matrix.fontName }}/TTF/
+          zip -r ${{ matrix.fontName }}.zip dist/${{ matrix.fontName }}/TTF/
       # - name: List files
       #   working-directory: iosevka
       #   run: ls -la
