@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        fontName: ["IosevkaZan"]
+        fontName: ["IoZanCode", "IoZanText"]
 
     steps:
       # Checkout repository into `iosevka` sub directory
@@ -42,17 +42,18 @@ jobs:
         run: |
           npm install
           npm run build -- ttf::${{ matrix.fontName }}
-      - name: List files
-        working-directory: iosevka
-        run: ls -la
-      - name: Zip
-        shell: bash
-        working-directory: iosevka
-        run: |
-          zip -r IosevkaZan.zip dist/IosevkaZan/TTF/
-      - name: List files
-        working-directory: iosevka
-        run: ls -la
+          zir -r ${{ matrix.fontName }}.zip dist/${{ matrix.fontName }}/TTF/
+      # - name: List files
+      #   working-directory: iosevka
+      #   run: ls -la
+      # - name: Zip
+      #   shell: bash
+      #   working-directory: iosevka
+      #   run: |
+      #     zip -r IosevkaZan.zip dist/IosevkaZan/TTF/
+      # - name: List files
+      #   working-directory: iosevka
+      #   run: ls -la
       # Install and setup Dependencies
       # @TODO cache the next 4 steps with actions/cache or upload
       - name: Setup core dependencies
@@ -80,48 +81,50 @@ jobs:
         run: |
           fontforge --version
           fontforge --version 2>&1 | grep libfontforge | awk '{print $NF}'
-      - name: Nerd Font
+      - name: Build NerdFont ${{ matrix.fontName }}
         shell: bash
         run: |
           wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip
           unzip FontPatcher.zip -d FontPatcher/
           fontforge --script `pwd`/FontPatcher/font-patcher --version
           mkdir iosevka/dist/IosevkaZan/NF/
-          for file in `pwd`/iosevka/dist/IosevkaZan/TTF/*.ttf
+          for file in `pwd`/iosevka/dist/${{ matrix.fontName }}/TTF/*.ttf
           do
-            fontforge --script `pwd`/FontPatcher/font-patcher -c --careful $file -out `pwd`/iosevka/dist/IosevkaZan/NF
+            fontforge --script `pwd`/FontPatcher/font-patcher -c --careful $file -out `pwd`/iosevka/dist/${{ matrix.fontName }}/NF
           done
           
-          zip -r IosevkaZanNF.zip iosevka/dist/IosevkaZan/NF/
+          zip -r ${{ matrix.fontName }}NF.zip iosevka/dist/${{ matrix.fontName }}/NF/
       - name: Release
         uses: actions/upload-artifact@v4
         with:
-          name: IosevkaZan
-          path: iosevka/IosevkaZan.zip
+          name: ${{ matrix.fontName }}
+          path: iosevka/${{ matrix.fontName }}.zip
           retention-days: 1
-      - name: ReleaseNF
+      - name: Release ${{ matrix.fontName }}NF
         uses: actions/upload-artifact@v4
         with:
-          name: IosevkaZanNF
-          path: IosevkaZanNF.zip
+          name: ${{ matrix.fontName }}NF
+          path: ${{ matrix.fontName }}NF.zip
           retention-days: 1
       - uses: actions/download-artifact@v4
-      - name: Generate SHA256 checksums
+      - name: Generate SHA256 checksums ${{ matrix.fontName }}
         run: |
-          sha256sum iosevka/IosevkaZan.zip > IosevkaZan.zip.sha256sum
-          echo "SHA_IOZAN=$(cat IosevkaZan.zip.sha256sum)" >> $GITHUB_ENV
-      - name: Generate SHA256 checksums NF
+          sha256sum iosevka/${{ matrix.fontName }}.zip > ${{ matrix.fontName }}.zip.sha256sum
+          echo "SHA_IOZAN=$(cat ${{ matrix.fontName }}.sha256sum)" >> $GITHUB_ENV
+      - name: Generate SHA256 checksums NF ${{ matrix.fontName }}
         run: |
-          sha256sum IosevkaZanNF.zip > IosevkaZanNF.zip.sha256sum
-          echo "SHA_IOZAN_NF=$(cat IosevkaZanNF.zip.sha256sum)" >> $GITHUB_ENV
-      - name: Upload zip
+          sha256sum ${{ matrix.fontName }}NF.zip > ${{ matrix.fontName }}NF.zip.sha256sum
+          echo "SHA_IOZAN_NF=$(cat ${{ matrix.fontName }}NF.zip.sha256sum)" >> $GITHUB_ENV
+          echo "$GIHUB_ENV" > ${{ github.workspace }}-CHANGELOG.txt
+      - name: Upload zip ${{ matrix.fontName }}
         uses: softprops/action-gh-release@v2
         with:
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
           files: |
-            IosevkaZanNF.zip
-            IosevkaZan.zip.sha256sum
-            iosevka/IosevkaZan.zip
-            IosevkaZanNF.zip.sha256sum
+            ${{ matrix.fontName }}NF.zip
+            ${{ matrix.fontName }}.zip.sha256sum
+            iosevka/${{ matrix.fontName }}.zip
+            ${{ matrix.fontName }}NF.zip.sha256sum
             
 
       # - name: Publish release
