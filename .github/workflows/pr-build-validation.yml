@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.fontName }} font
-    if: github.repository == 'AgatZan/IosevkaZan'
+    if: github.repository == 'AgatZan/IoZan'
     runs-on: ubuntu-latest
     env:
       GH_REPO: ${{ github.repository }}
@@ -87,7 +87,7 @@ jobs:
           wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip
           unzip FontPatcher.zip -d FontPatcher/
           fontforge --script `pwd`/FontPatcher/font-patcher --version
-          mkdir iosevka/dist/IosevkaZan/NF/
+          mkdir iosevka/dist/${{ matrix.fontName }}/NF/
           for file in `pwd`/iosevka/dist/${{ matrix.fontName }}/TTF/*.ttf
           do
             fontforge --script `pwd`/FontPatcher/font-patcher -c --careful $file -out `pwd`/iosevka/dist/${{ matrix.fontName }}/NF
