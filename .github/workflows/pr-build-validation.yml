@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        fontName: ["IoZanCode", "IoZanText"]
+        fontName: ["IoZanCode", "IoZanText", "IoZanTextSlab"]
 
     steps:
       # Checkout repository into `iosevka` sub directory
