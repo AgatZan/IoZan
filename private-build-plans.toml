@@ -250,3 +250,147 @@ css = 900
 shape = 600
 menu = 5
 css = "normal"
+
+##______________________________ TEXT SLAB _______________________________##
+[buildPlans.IoZanTextSlab]
+family = "IoZanTextSlab"
+spacing = "quasi-proportional"
+serifs = "slab"
+noCvSs = true
+exportGlyphNames = false
+
+[buildPlans.IoZanTextSlab.variants.design]
+one = "base-long-top-serif"
+three = "two-arcs"
+four = "closed-non-crossing-serifed"
+five = "oblique-arched-serifed"
+six = "open-contour"
+seven = "bend-serifed"
+eight = "crossing-asymmetric"
+nine = "open-contour"
+zero = "slashed"
+capital-a = "straight-base-serifed"
+capital-b = "standard-interrupted-bilateral-serifed"
+capital-c = "bilateral-serifed"
+capital-d = "standard-bilateral-serifed"
+capital-e = "serifed"
+capital-f = "serifed"
+capital-g = "toothed-serifless-hooked"
+capital-h = "serifed"
+capital-i = "serifed"
+capital-j = "flat-hook-serifed"
+capital-k = "straight-serifed"
+capital-l = "serifed"
+capital-m = "hanging-serifed"
+capital-n = "standard-serifed"
+capital-p = "closed-serifed"
+capital-q = "crossing-curly-tailed"
+capital-r = "straight-serifed"
+capital-s = "bilateral-serifed"
+capital-u = "toothless-rounded-serifed"
+capital-w = "straight-serifed"
+capital-x = "straight-serifed"
+capital-z = "straight-serifed"
+a = "double-storey-hook-inward-serifed-tailed"
+b = "toothed-serifed"
+c = "bilateral-inward-serifed"
+d = "toothed-serifed"
+e = "flat-crossbar"
+f = "flat-hook-serifed"
+g = "single-storey-serifed"
+h = "straight-serifed"
+i = "zshaped"
+j = "flat-hook-serifed"
+k = "symmetric-touching-serifed"
+l = "serifed"
+m = "earless-corner-double-arch-serifed"
+n = "earless-corner-straight-serifed"
+p = "earless-rounded-serifed"
+q = "earless-rounded-straight-serifed"
+r = "hookless-base-serifed"
+s = "bilateral-serifed"
+t = "diagonal-tailed-asymmetric-short-neck2"
+u = "toothed-serifed"
+w = "straight-flat-top-serifed"
+y = "straight-serifed"
+z = "straight-serifed"
+long-s = "flat-hook-serifless"
+eszet = "traditional-flat-hook-serifless"
+lower-eth = "straight-bar"
+capital-thorn = "serifed"
+lower-thorn = "serifed"
+lower-alpha = "barred-tailed-serifed"
+lower-beta = "standard"
+capital-gamma = "bottom-serifed"
+capital-delta = "curly"
+lower-delta = "rounded"
+lower-iota = "serifed-flat-tailed"
+capital-lambda = "straight-base-serifed"
+lower-lambda = "straight-turn"
+lower-mu = "toothless-rounded-serifless"
+lower-nu = "casual"
+lower-xi = "rounded"
+lower-pi = "tailless"
+lower-tau = "tailless"
+lower-phi = "cursive"
+lower-chi = "semi-chancery-curly-serifless"
+lower-psi = "serifless"
+cyrl-a = "double-storey-hook-inward-serifed-serifed"
+cyrl-ve = "standard-bilateral-serifed"
+cyrl-capital-zhe = "curly"
+cyrl-zhe = "curly"
+cyrl-ze = "bilateral-inward-serifed"
+cyrl-capital-ka = "curly-serifed"
+cyrl-ka = "curly-serifed"
+cyrl-el = "straight"
+cyrl-em = "flat-bottom-serifed"
+cyrl-capital-u = "straight-turn-serifed"
+cyrl-u = "straight-serifless"
+cyrl-ef = "split-serifed"
+cyrl-yeri = "corner"
+cyrl-yery = "corner"
+cyrl-e = "bilateral-serifed"
+tittle = "round"
+asterisk = "penta-high"
+caret = "medium"
+paren = "flat-arc"
+brace = "curly-flat-boundary"
+guillemet = "straight"
+number-sign = "upright"
+ampersand = "upper-open"
+at = "fourfold-solid-inner"
+percent = "dots"
+bar = "natural-slope"
+question = "corner-flat-hooked"
+pilcrow = "low"
+partial-derivative = "straight-bar"
+micro-sign = "toothed-serifless"
+lig-neq = "slightly-slanted"
+lig-equal-chain = "with-notch"
+lig-hyphen-chain = "without-notch"
+lig-plus-chain = "with-notch"
+lig-double-arrow-bar = "with-notch"
+lig-single-arrow-bar = "with-notch"
+
+  [buildPlans.IoZanTextSlab.ligations]
+  inherits = "dlig"
+
+[buildPlans.IoZanTextSlab.weights.Thin]
+shape = 100
+menu = 100
+css = 100
+
+[buildPlans.IoZanTextSlab.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.IoZanTextSlab.weights.Heavy]
+shape = 900
+menu = 900
+css = 900
+
+[buildPlans.IoZanTextSlab.widths.Normal]
+shape = 600
+menu = 5
+css = "normal"
